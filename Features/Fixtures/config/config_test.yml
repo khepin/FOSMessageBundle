@@ -1,0 +1,43 @@
+framework:
+    #esi:             ~
+    secret:          none
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: %kernel.debug%
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    session:
+        handler_id: session.handler.filesystem
+    trust_proxy_headers: false
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+
+monolog:
+    handlers:
+        main:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug
+        firephp:
+            type:  firephp
+            level: info
+
+# Doctrine Configuration
+# doctrine:
+#     dbal:
+#         driver:   %database_driver%
+#         host:     %database_host%
+#         port:     %database_port%
+#         dbname:   %database_name%
+#         user:     %database_user%
+#         password: %database_password%
+#         charset:  UTF8
+
+#     orm:
+#         auto_generate_proxy_classes: %kernel.debug%
+#         auto_mapping: true
