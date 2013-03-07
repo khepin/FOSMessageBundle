@@ -9,7 +9,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     session:
-        handler_id: session.handler.filesystem
+        handler_id: session.storage.mock_file
     trust_proxy_headers: false
 
 # Twig Configuration
@@ -26,6 +26,24 @@ monolog:
         firephp:
             type:  firephp
             level: info
+
+doctrine_mongodb:
+    connections:
+        default:
+            server: mongodb://localhost:27017
+            options:
+                connect: true
+    default_database: fosmessage
+    document_managers:
+        default:
+            auto_mapping: true
+            mappings:
+                FOSMessageBundle: ~
+
+fos_message:
+    db_driver:  mongodb
+    thread_class: Mashup\MessageBundle\Document\MessageThread
+    message_class: Mashup\MessageBundle\Document\Message
 
 # Doctrine Configuration
 # doctrine:

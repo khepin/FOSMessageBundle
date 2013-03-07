@@ -33,7 +33,11 @@
         "symfony/class-loader": "2.1.*",
         "symfony/monolog-bundle": "2.1.*",
         "sensio/framework-extra-bundle": "2.1.*",
-        "symfony/form": "2.1.*"
+        "symfony/form": "2.1.*",
+        "doctrine/mongodb-odm-bundle": "3.0.*@beta",
+        "doctrine/mongodb-odm": "1.*@beta",
+        "doctrine/mongodb": "1.*",
+        "friendsofsymfony/user-bundle": "*"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "dev-master",
