@@ -16,6 +16,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
         );
     }
 

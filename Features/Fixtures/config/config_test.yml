@@ -42,9 +42,62 @@ doctrine_mongodb:
 
 fos_message:
     db_driver:  mongodb
-    thread_class: Mashup\MessageBundle\Document\MessageThread
-    message_class: Mashup\MessageBundle\Document\Message
+    thread_class: FOS\MessageBundle\Features\Fixtures\Thread
+    message_class: FOS\MessageBundle\Features\Fixtures\Message
 
+fos_user:
+    db_driver: mongodb # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: FOS\MessageBundle\Features\Fixtures\User
+
+security:
+    encoders:
+        "FOS\UserBundle\Model\UserInterface": sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_ORGANIZER
+        ROLE_ORGANIZER:   ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        fos_userbundle:
+            id: mashup.user_manager
+        fos_facebook_provider:
+            id: facebook.user_provider
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/.*
+            fos_facebook:
+                provider: fos_facebook_provider
+                app_url: "http://apps.facebook.com/mashup-dev/"
+                server_url: "http://mashup.zapto.org"
+                use_referer: true
+                check_path: /login/facebook
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                use_referer: true
+                check_path: /login_check
+            anonymous:    true
+            logout: ~
+            remember_me:
+                key:    %secret%
+                lifetime: 864000 # 10 days
+                path: /
+                domain: ~
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+parameters:
+    secret: notthatsecret
 # Doctrine Configuration
 # doctrine:
 #     dbal:
