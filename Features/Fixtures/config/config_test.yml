@@ -39,7 +39,10 @@ doctrine_mongodb:
         default:
             auto_mapping: true
             mappings:
-                FOSMessageBundle: ~
+                FOSMessageBundle:
+                    dir: Features/Fixtures
+                    type: annotation
+                    prefix: FOS\MessageBundle\Features\Fixtures\Document
 
 fos_message:
     db_driver:  mongodb
@@ -49,7 +52,7 @@ fos_message:
 fos_user:
     db_driver: mongodb # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
-    user_class: FOS\MessageBundle\Features\Fixtures\User
+    user_class: FOS\MessageBundle\Features\Fixtures\Document\TestUser
 
 security:
     encoders:
