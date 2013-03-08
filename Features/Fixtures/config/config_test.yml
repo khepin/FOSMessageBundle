@@ -11,6 +11,7 @@ framework:
     session:
         handler_id: session.storage.mock_file
     trust_proxy_headers: false
+    test: ~
 
 # Twig Configuration
 twig:
@@ -61,9 +62,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: mashup.user_manager
-        fos_facebook_provider:
-            id: facebook.user_provider
+            id: fos_user.user_provider.username
 
     firewalls:
         dev:
@@ -72,12 +71,6 @@ security:
 
         main:
             pattern: ^/.*
-            fos_facebook:
-                provider: fos_facebook_provider
-                app_url: "http://apps.facebook.com/mashup-dev/"
-                server_url: "http://mashup.zapto.org"
-                use_referer: true
-                check_path: /login/facebook
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
@@ -98,6 +91,10 @@ security:
 
 parameters:
     secret: notthatsecret
+
+swiftmailer:
+    spool:     { type: memory }
+    disable_delivery: true
 # Doctrine Configuration
 # doctrine:
 #     dbal:

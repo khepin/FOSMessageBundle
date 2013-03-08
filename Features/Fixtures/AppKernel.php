@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
+            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
         );
     }
 
